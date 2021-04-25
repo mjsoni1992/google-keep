@@ -2,16 +2,64 @@
 
 body {
   padding-bottom: 70px;
+  background-color: #202124;
+  padding-top: 70px;
 }
 
 header {
   background-color: $primaryColor;
-  padding: 1rem;
+  box-shadow: inset 0 -1px 0 0 #5f6368;
+  padding: 8px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9;
 
   .logo {
     a {
-      color: #fff;
-      font-size: $fontH6;
+      color: #e8eaed;
+      font-size: 22px;
+    }
+  }
+
+  .headerIcons {
+    li {
+      a {
+        display: flex;
+        width: 40px;
+        height: 40px;
+        background-color: #3a3b3cfa;
+        align-items: center;
+        line-height: 1;
+        border-radius: 100%;
+        color: #e8eaed;
+        justify-content: center;
+      }
+    }
+  }
+
+  .searchInput {
+    span {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 25px;
+      color: #e8eaed;
+    }
+
+    input {
+      width: 100%;
+      background-color: #525355;
+      border: none;
+      outline: none;
+      color: #e8eaed;
+      padding: 10px;
+      border-radius: 6px;
+      padding-left: 50px;
+
+      &::placeholder {
+        color: #e8eaed;
+      }
     }
   }
 }
@@ -30,18 +78,37 @@ footer {
 }
 
 .addButton {
-  background-color: transparent;
+  background-color: #3a3b3c;
   border: none;
-  color: $primaryColor;
+  color: #e8eaed;
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
 }
 
 .form {
   max-width: 600px;
-  margin: 0 auto;
-  background-color: #fff;
-  box-shadow: 0px 30px 50px -40px #11aeea69;
-  padding: 35px 35px 0;
-  border: 1px solid #11aeea2e;
+  margin: 35px auto;
+  background-color: #202124;
+  box-shadow: 0px 30px 50px -40px #00000069;
+  padding: 5px;
+  border: 2px solid #3a3b3c;
+  border-radius: 9px;
+
+  .form-control {
+    background-color: transparent;
+    border: none;
+    color: #e8eaed;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  .form-group {
+    margin: 0;
+  }
 
   button {
     &:focus {
@@ -51,18 +118,63 @@ footer {
 }
 
 .noteWrapper {
-  background-color: #11aeea;
-  padding: 25px;
+  background-color: transparent;
+  padding: 15px;
   border-radius: 5px;
   box-shadow: 0px 24px 57px -24px #0000005c;
   color: #fff;
   margin-bottom: 35px;
+  border: 1px solid #3a3b3c;
+
+  h3 {
+    font-size: 20px;
+  }
+
+  &:hover {
+    .actionButtons {
+      opacity: 1;
+    }
+  }
 }
 
 .actionButtons {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: -15px;
-  margin-bottom: 20px;
+  margin-top: 30px;
+  margin-bottom: 0px;
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.modal-content {
+  border: 1px solid;
+  background-color: #202124;
+  border-color: #5f6368;
+  color: #e8eaed;
+
+  .modal-header,
+  .modal-footer {
+    border: none;
+  }
+
+  .close {
+    color: #e8eaed;
+  }
+
+  .modal-footer {
+    button {
+      background-color: #1b1b1b;
+      border: none;
+      color: #e8eaed;
+      box-shadow: none;
+      padding: 6px 25px;
+      font-size: 14px;
+    }
+  }
+}
+
+button,
+button:focus {
+  outline: none;
 }
