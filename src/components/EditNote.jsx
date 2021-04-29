@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import { useForm } from "react-hook-form";
 import { db } from "../Firebase"
+import SaveIcon from '@material-ui/icons/Save';
 const EditNote = ({ noteTitle, noteContent, handleEdit, id }) => {
 
     const closePopupRef = useRef();
@@ -15,14 +16,12 @@ const EditNote = ({ noteTitle, noteContent, handleEdit, id }) => {
         var docRef = db.collection('notes').doc(id);
 
         // Updatem Notes data
-        var updateNotesFields = docRef.update(data);
-
-
-        formState.isSubmitted = true;
-        if (formState.isSubmitted) {
-            handleEdit(data);
+        var updateNotesFields = docRef.update(data).then(() => {
+            document.getElementsByClassName("modal-backdrop")[0].click();
             document.getElementsByClassName("modal-backdrop")[0].remove();
-        }
+            handleEdit();
+        });
+
 
 
 
@@ -34,12 +33,6 @@ const EditNote = ({ noteTitle, noteContent, handleEdit, id }) => {
             <div ref={closePopupRef} className="modal fade" id={`exampleModal-${id}`} HTMLtabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered" role="document">
                     <div className="modal-content">
-                        <div className="modal-header">
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times; </span>
-                            </button>
-                        </div>
-
                         <form className="editForm" id={`editNoteForm-${id}`} onSubmit={handleSubmit(onSubmit)}>
                             <div className="form-group">
 
@@ -48,13 +41,11 @@ const EditNote = ({ noteTitle, noteContent, handleEdit, id }) => {
                             <div className="form-group">
                                 <textarea {...register("noteContent")} placeholder="Add Content Here...!" className="form-control" name="noteContent" />
                                 <button type="submit" name="submit" className="addButton">
-                                    Update
+                                    <SaveIcon />
                                 </button>
                             </div>
                         </form>
-                        <div className="modal-footer">
-                            <button type="button" className="btn closePopup" data-dismiss="modal">Close</button>
-                        </div>
+
                     </div>
                 </div>
             </div>
